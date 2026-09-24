@@ -18,10 +18,6 @@ interface Student {
 
 export default function AdminDashboard() {
   const router = useRouter();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [pin, setPin] = useState("");
-  const [pinError, setPinError] = useState(false);
-  
   const [reports, setReports] = useState<any[]>([]);
   const [students, setStudents] = useState<Student[]>([]);
   
@@ -39,40 +35,8 @@ export default function AdminDashboard() {
   const [filterDate, setFilterDate] = useState(getTodayLocalString());
 
   useEffect(() => {
-    const authStatus = localStorage.getItem("adminAuth");
-    if (authStatus === "true") {
-      setIsAuthenticated(true);
-      fetchData();
-    }
+    fetchData();
   }, []);
-
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      const res = await fetch('/api/admin/pin', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ pin }),
-      });
-      const data = await res.json();
-      
-      if (data.success) {
-        setIsAuthenticated(true);
-        localStorage.setItem("adminAuth", "true");
-        fetchData();
-      } else {
-        setPinError(true);
-      }
-    } catch (error) {
-      setPinError(true);
-    }
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("adminAuth");
-    setIsAuthenticated(false);
-    setPin("");
-  };
 
   const fetchData = async () => {
     setLoading(true);
@@ -179,38 +143,6 @@ export default function AdminDashboard() {
     }
   };
 
-  if (!isAuthenticated) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-        <form onSubmit={handleLogin} className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-sm">
-          <div className="text-center mb-8">
-            <h1 className="text-2xl font-bold text-gray-800">ระบบจัดการเวร</h1>
-            <p className="text-gray-500 mt-2">กรุณาใส่รหัสผ่านเพื่อเข้าสู่ระบบ</p>
-          </div>
-          <div>
-            <input
-              type="password"
-              value={pin}
-              onChange={(e) => {
-                setPin(e.target.value);
-                setPinError(false);
-              }}
-              className={`w-full border-2 rounded-xl p-4 text-center text-2xl tracking-[0.5em] focus:outline-none transition-all ${
-                pinError ? 'border-red-500 bg-red-50 text-red-700' : 'border-gray-200 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100'
-              }`}
-              placeholder="••••"
-              maxLength={6}
-            />
-            {pinError && <p className="text-red-500 text-sm text-center mt-3 font-medium">รหัสผ่านไม่ถูกต้อง</p>}
-          </div>
-          <button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl mt-6 transition-all shadow-md active:scale-[0.98]">
-            เข้าสู่ระบบ
-          </button>
-        </form>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen bg-gray-50 pb-12">
       <nav className="bg-white border-b sticky top-0 z-10 shadow-sm">
@@ -224,9 +156,7 @@ export default function AdminDashboard() {
                 <Users size={18} />
                 <span className="hidden sm:inline">จัดการนักเรียน</span>
               </Link>
-              <button onClick={handleLogout} className="text-red-500 hover:bg-red-50 p-2 rounded-lg transition-colors" title="ออกจากระบบ">
-                <LogOut size={20} />
-              </button>
+              
             </div>
           </div>
         </div>
