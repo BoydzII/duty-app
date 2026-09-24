@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'MixedFont';
+  src: local('Times New Roman');
+  unicode-range: U+0000-007F, U+0080-00FF; /* Basic Latin and Latin-1 Supplement */
+}
+
+:root {
+  color-scheme: light !important;
+  --background: #f9fafb;
+  --foreground: #111827;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+html {
+  color-scheme: light !important;
+  background-color: #f9fafb;
+}
+
+body {
+  background-color: #f9fafb !important;
+  color: #111827 !important;
+  font-family: 'MixedFont', var(--font-sarabun), sans-serif;
+}
+
+/* Force light theme for all inputs & forms across all devices */
+input, select, textarea {
+  color-scheme: light !important;
+  background-color: #ffffff !important;
+  color: #111827 !important;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #9ca3af !important;
+}

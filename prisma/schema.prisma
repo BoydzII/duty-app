@@ -1,0 +1,27 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Intern {
+  id         String   @id @default(cuid())
+  firstName  String
+  lastName   String
+  department String
+  startDate  DateTime
+  endDate    DateTime
+  reports    DailyReport[]
+}
+
+model DailyReport {
+  id        String   @id @default(cuid())
+  internId  String
+  intern    Intern   @relation(fields: [internId], references: [id])
+  date      DateTime
+  imageUrl  String // stored as relative URL or base64
+  createdAt DateTime @default(now())
+}
