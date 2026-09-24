@@ -7,19 +7,18 @@ export default function Home() {
     <div className="flex flex-col items-center justify-center py-6 space-y-6">
       
       <div className="flex flex-col items-center gap-4 w-full max-w-md px-4">
-        <div className="flex items-center justify-center gap-6">
+        <div className="flex items-center justify-center ">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/school-logo.jpg" alt="โรงเรียนปากช่อง" className="h-24 md:h-28 object-contain mix-blend-multiply" />
           
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/smte-pakchong-logo.png" alt="SMTE Pakchong School" className="h-20 md:h-24 object-contain mix-blend-multiply" />
+          
         </div>
         
         <div className="text-center mt-3">
-          <p className="text-lg md:text-xl font-extrabold text-blue-900 tracking-wide">
-            โครงการห้องเรียนพิเศษวิทยาศาสตร์ คณิตศาสตร์ เทคโนโลยี และสิ่งแวดล้อม (SMTE)
+          <p className="text-2xl md:text-3xl font-extrabold text-blue-900 tracking-wide">
+            โรงเรียนปากช่อง
           </p>
-          <p className="text-base md:text-lg font-bold text-blue-800 mt-1">ระดับมัธยมศึกษาตอนปลาย</p>
+          <p className="text-lg md:text-xl font-bold text-blue-800 mt-2">จังหวัดนครราชสีมา</p>
         </div>
       </div>
 
